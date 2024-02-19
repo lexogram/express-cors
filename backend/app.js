@@ -33,6 +33,8 @@ app.get('/', (req, res) => {
   } = req
   const origin1 = req.header('Origin')
   const origin2 = req.headers.origin
+  const origin3 = req.headers.referer
+  const origin4 = req.get('origin')
   const remoteAddress = req.socket.remoteAddress
 
   const message = `<pre>
@@ -57,6 +59,8 @@ originalUrl:   ${originalUrl}
 
 origin1:       ${origin1}
 origin2:       ${origin2}
+origin3:       ${origin3}
+origin4:       ${origin4}
 remoteAddress: ${remoteAddress}
 </pre>
 `
