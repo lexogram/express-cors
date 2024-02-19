@@ -1,5 +1,6 @@
 require('dotenv').config()
 const PORT = process.env.PORT || 3000
+const HOST = process.env.HOST
 
 const express = require('express')
 const cors = require('cors')
@@ -19,6 +20,15 @@ app.get('/', (req, res) => {
     subdomains,
     hostname,
     path,
+    query,
+    route,
+    secure,
+
+    ip,
+    ips,
+    app,
+    url,
+    baseUrl,
     originalUrl,
   } = req
   const origin1 = req.header('Origin')
@@ -26,13 +36,23 @@ app.get('/', (req, res) => {
   const remoteAddress = req.socket.remoteAddress
 
   const message = `<pre>
-Connected to port ${PORT}
+Connected to port ${HOST}:${PORT}
 ${Date()}
 
 protocol:      ${protocol}
 subdomains:    ${subdomains}
 hostname:      ${hostname}
 path:          ${path}
+query:         ${JSON.stringify(query)}
+
+route:         ${JSON.stringify(route, null, "  ")}
+secure:        ${secure}
+
+ip:            ${ip}
+ips:           ${ips}
+app:           ${app}
+url:           ${url}
+baseUrl:       ${baseUrl}
 originalUrl:   ${originalUrl}
 
 origin1:       ${origin1}
@@ -44,5 +64,5 @@ remoteAddress: ${remoteAddress}
 })
 
 app.listen(PORT, () => {
-  console.log(`Test server at http://192.168.0.10:${PORT}`);
+  console.log(`Test server at ${HOST}:${PORT}`);
 })
